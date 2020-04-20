@@ -1,8 +1,10 @@
 #!/usr/bin/env groovy
 
-def call(String repoName) {
+def call(String[] repoNames) {
     if (env.BRANCH_NAME == "master" || env.BRANCH_NAME.contains("SNAPSHOT")) {
-        def jobName = "../${repoName}/${env.BRANCH_NAME}"
-        build job: jobName, propagate: false, wait: false
+        for (repoName in repoNames) {
+            def jobName = "../${repoName}/${env.BRANCH_NAME}"
+            build job: jobName, propagate: false, wait: false
+        }
     }
 }
