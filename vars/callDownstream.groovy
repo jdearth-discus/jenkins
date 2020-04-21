@@ -4,8 +4,8 @@ def call(String repoNames) {
     echo repoName
     if (env.BRANCH_NAME == "master" || env.BRANCH_NAME.endsWith("SNAPSHOT")) {
         String[] str = repoNames.split(',')
-        for (String repoName : str) {
-            def jobName = "../${repoName}/${env.BRANCH_NAME}"
+        for (String x : str) {
+            def jobName = "../" + x + "/${env.BRANCH_NAME}"
             build job: jobName, propagate: false, wait: false
         }
     } else {
